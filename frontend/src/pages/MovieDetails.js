@@ -100,7 +100,7 @@ const MovieDetails = () => {
     if (!token) return;
     const episodeChecks = episodesList.map((ep) =>
       fetch(
-        `http://localhost:5000/api/watch/check/${id}/tv?season=${seasonNumber}&episode=${ep.episode_number}`,
+        `https://tvtracker-j7g5.onrender.com/api/watch/check/${id}/tv?season=${seasonNumber}&episode=${ep.episode_number}`,
         { headers: { Authorization: `Bearer ${token}` } }
       )
         .then((res) => res.json())
@@ -120,7 +120,7 @@ const MovieDetails = () => {
   const checkWatchlist = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/watchlist/check/${id}/${mediaType}`,
+        `https://tvtracker-j7g5.onrender.com/api/watchlist/check/${id}/${mediaType}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const data = await res.json();
@@ -133,7 +133,7 @@ const MovieDetails = () => {
   const checkWatchedStatus = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/watch/check/${id}/movie`,
+        `https://tvtracker-j7g5.onrender.com/api/watch/check/${id}/movie`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const data = await res.json();
@@ -146,7 +146,7 @@ const MovieDetails = () => {
   const toggleWatchlist = async () => {
     const method = inWatchlist ? "DELETE" : "POST";
     try {
-      await fetch("http://localhost:5000/api/watchlist", {
+      await fetch("https://tvtracker-j7g5.onrender.com/api/watchlist", {
         method,
         headers: {
           "Content-Type": "application/json",
@@ -175,7 +175,7 @@ const MovieDetails = () => {
     const method = isCurrentlyWatched ? "DELETE" : "POST";
 
     try {
-      const res = await fetch(`http://localhost:5000/api/watch/${endpoint}`, {
+      const res = await fetch(`https://tvtracker-j7g5.onrender.com/api/watch/${endpoint}`, {
         method,
         headers: {
           "Content-Type": "application/json",
