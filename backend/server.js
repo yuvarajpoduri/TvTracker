@@ -23,12 +23,17 @@ app.use("/api/stats", statsRoutes);
 app.use("/api/groups", groupRoutes);
 app.use("/api/chat", chatRoutes);
 
-const frontendPath = path.join(__dirname, "frontend", "build"); 
+const frontendPath = path.join(__dirname, "..", "frontend", "build");
 app.use(express.static(frontendPath));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
+
+mongoose
+  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("✅ Connected to MongoDB"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
