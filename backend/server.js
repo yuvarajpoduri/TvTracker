@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config();
 const authRoutes = require("./routes/auth");
 const watchRoutes = require("./routes/watch");
 const watchlistRoutes = require("./routes/watchlist");
@@ -13,8 +14,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 🔥 Direct MongoDB URI here
-const mongoURI = "mongodb://localhost:27017/tvtracker";
+const mongoURI = process.env.MONGODB_URI;
 
 mongoose
   .connect(mongoURI, {
@@ -34,5 +34,6 @@ app.use("/api/stats", statsRoutes);
 app.use("/api/groups", groupRoutes);
 app.use("/api/chat", chatRoutes);
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
