@@ -12,7 +12,6 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // IMPORTANT: Replace with your actual TMDb API Key
   const API_KEY = "db530eb75fdd431140fb945e4903aeb4";
   const token = localStorage.getItem("token");
 
@@ -20,7 +19,7 @@ const Dashboard = () => {
     if (token) {
       fetchDashboardData();
     } else {
-      setLoading(false); // If no token, stop loading
+      setLoading(false);
     }
   }, [token]);
 
@@ -28,13 +27,13 @@ const Dashboard = () => {
     setLoading(true);
     try {
       const [watchesRes, currentRes, watchlistRes] = await Promise.all([
-        fetch("http://localhost:5000/api/watch", {
+        fetch("https://tvtracker-j7g5.onrender.com/api/watch", {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        fetch("http://localhost:5000/api/watch/currently-watching", {
+        fetch("https://tvtracker-j7g5.onrender.com/api/watch/currently-watching", {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        fetch("http://localhost:5000/api/watchlist", {
+        fetch("https://tvtracker-j7g5.onrender.com/api/watchlist", {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
@@ -47,7 +46,6 @@ const Dashboard = () => {
       setCurrentlyWatching(current.slice(0, 6));
       setWatchlistPreview(watchlist.slice(0, 6));
 
-      // Fetch progress for currently watching shows
       const progressPromises = current.slice(0, 6).map(async (show) => {
         try {
           const tmdbRes = await fetch(
