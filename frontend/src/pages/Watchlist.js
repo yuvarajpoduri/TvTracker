@@ -19,7 +19,7 @@ const Watchlist = () => {
 
   const fetchWatchlist = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/watchlist", {
+      const response = await fetch("https://tvtracker-j7g5.onrender.com/api/watchlist", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await response.json();
@@ -43,7 +43,7 @@ const Watchlist = () => {
 
   const removeFromWatchlist = async (tmdbId, mediaType) => {
     try {
-      await fetch("http://localhost:5000/api/watchlist", {
+      await fetch("https://tvtracker-j7g5.onrender.com/api/watchlist", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
