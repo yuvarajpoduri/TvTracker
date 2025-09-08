@@ -21,7 +21,7 @@ const Stats = () => {
       }
 
       try {
-        const response = await fetch("http://localhost:5000/api/stats", {
+        const response = await fetch("https://tvtracker-j7g5.onrender.com/api/stats", {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!response.ok) {
